@@ -1,0 +1,11 @@
+{
+  "name": "python-uv-dev",
+  "build": { "dockerfile": "Dockerfile" },
+  "extensions": [
+    "ms-python.python",
+    "ms-python.vscode-pylance"
+  ],
+  "postCreateCommand": "uv sync",
+  "forwardPorts": [8501],
+  "remoteUser": "vscode"
+}
