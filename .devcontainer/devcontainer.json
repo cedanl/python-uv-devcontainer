@@ -1,12 +1,23 @@
 {
   "name": "python-uv-dev",
   "build": { "dockerfile": "Dockerfile" },
-  "extensions": [
-    "ms-python.python",
-    "ms-python.vscode-pylance",
-    "anthropic.claude-code"
-  ],
-  "postCreateCommand": "uv sync && npx skills add cedanl/.github --skill '*' -a claude-code -a opencode -y --copy -g",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash"
+      },
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "anthropic.claude-code"
+      ]
+    }
+  },
+  "postCreateCommand": "bash .devcontainer/post-create.sh",
   "forwardPorts": [8501],
-  "remoteUser": "vscode"
+  "remoteUser": "vscode",
+  "remoteEnv": {
+    "ANTHROPIC_FOUNDRY_API_KEY": "${localEnv:ANTHROPIC_FOUNDRY_API_KEY}",
+    "ANTHROPIC_FOUNDRY_RESOURCE": "${localEnv:ANTHROPIC_FOUNDRY_RESOURCE}"
+  }
 }
