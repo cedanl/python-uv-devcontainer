@@ -6,7 +6,7 @@
     "ms-python.vscode-pylance",
     "anthropic.claude-code"
   ],
-  "postCreateCommand": "uv sync",
+  "postCreateCommand": "uv sync && npx skills add cedanl/.github --skill '*' -a claude-code -a opencode -y --copy -g",
   "forwardPorts": [8501],
   "remoteUser": "vscode"
 }
