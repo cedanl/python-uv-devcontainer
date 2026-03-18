@@ -95,6 +95,42 @@ devcontainer exec --workspace-folder . bash
 
 ---
 
+## Claude Code instellen
+
+Claude Code is vooraf geïnstalleerd in de container, maar heeft twee omgevingsvariabelen nodig om verbinding te maken met de CEDA Foundry API.
+
+### Stap 1 — Maak het secrets-bestand aan
+
+```bash
+cp .devcontainer/.env.example .devcontainer/.env
+```
+
+### Stap 2 — Vul je credentials in
+
+Open `.devcontainer/.env` en vul de twee waarden in:
+
+```
+ANTHROPIC_FOUNDRY_API_KEY=<jouw api key>
+ANTHROPIC_FOUNDRY_RESOURCE=<jouw resource naam>
+```
+
+> Dit bestand staat in `.gitignore` en wordt nooit gecommit.
+
+### Stap 3 — Bouw de container (opnieuw)
+
+Druk op `F1` → **Dev Containers: Rebuild Container**.
+
+Docker laadt het `.env`-bestand direct in bij het starten van de container. Na het herbouwen werkt `claude` meteen.
+
+### Controleren
+
+```bash
+claude --version
+echo $ANTHROPIC_FOUNDRY_API_KEY  # moet je key tonen
+```
+
+---
+
 ## Wat zit er in de container?
 
 Na het opstarten zijn de volgende tools beschikbaar:
