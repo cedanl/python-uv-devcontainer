@@ -13,11 +13,9 @@
       ]
     }
   },
+  "initializeCommand": "touch .devcontainer/.env",
+  "runArgs": ["--env-file", ".devcontainer/.env"],
   "postCreateCommand": "bash .devcontainer/post-create.sh",
   "forwardPorts": [8501],
-  "remoteUser": "vscode",
-  "runArgs": [
-    "--env", "ANTHROPIC_FOUNDRY_API_KEY",
-    "--env", "ANTHROPIC_FOUNDRY_RESOURCE"
-  ]
+  "remoteUser": "vscode"
 }
