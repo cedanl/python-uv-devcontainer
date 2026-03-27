@@ -1,12 +1,22 @@
 {
   "name": "python-uv-dev",
   "build": { "dockerfile": "Dockerfile" },
-  "extensions": [
-    "ms-python.python",
-    "ms-python.vscode-pylance",
-    "anthropic.claude-code"
-  ],
-  "postCreateCommand": "uv sync",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash"
+      },
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "anthropic.claude-code"
+      ]
+    }
+  },
+  "initializeCommand": "touch .devcontainer/.env",
+  "runArgs": ["--env-file", ".devcontainer/.env"],
+  "postCreateCommand": "bash .devcontainer/post-create.sh",
+  "postAttachCommand": "[[ ! -f ~/.claude/.onboarded ]] && bash .devcontainer/onboard.sh || true",
   "forwardPorts": [8501],
   "remoteUser": "vscode"
 }
