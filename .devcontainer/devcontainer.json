@@ -14,7 +14,7 @@
     }
   },
   "initializeCommand": "touch .devcontainer/.env",
-  "runArgs": ["--env-file", ".devcontainer/.env"],
+  "runArgs": ["--env-file", "${localWorkspaceFolder}/.devcontainer/.env"],
   "postCreateCommand": "bash .devcontainer/post-create.sh",
   "postAttachCommand": "[[ ! -f ~/.claude/.onboarded ]] && bash .devcontainer/onboard.sh || true",
   "forwardPorts": [8501],

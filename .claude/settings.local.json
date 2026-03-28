@@ -1,12 +1,13 @@
 {
   "permissions": {
-    "defaultMode": "bypassPermissions",
     "allow": [
       "Bash(uv init:*)",
       "Bash(uv add:*)",
       "Read(//tmp/**)",
       "Skill(update-config)",
-      "Skill(update-config:*)"
-    ]
+      "Skill(update-config:*)",
+      "Bash(uv run:*)"
+    ],
+    "defaultMode": "bypassPermissions"
   }
 }

@@ -69,7 +69,6 @@ Na het herbouwen werkt `claude` meteen.
 | `python` | Python 3.12 |
 | `uv` | Snelle Python package manager |
 | `claude` | Claude Code CLI |
-| `gh` | GitHub CLI |
 | CEDA org-skills | Geladen vanuit `cedanl/.github` via `npx skills` |
 
 ## Problemen oplossen
