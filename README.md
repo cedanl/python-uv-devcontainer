@@ -62,6 +62,17 @@ ANTHROPIC_FOUNDRY_RESOURCE=<jouw resource naam>
 
 Na het herbouwen werkt `claude` meteen.
 
+**Stap 4** — Installeer de **Claude** VS Code-extensie (`anthropic.claude-code`) en zet bewerkingen op automatisch accepteren:
+
+`F1` → **Open User Settings (JSON)** → voeg toe:
+```json
+"chat.editing.autoAccept": true
+```
+
+Zonder deze instelling vraagt de extensie bij elke bestandswijziging om bevestiging.
+
+> **Snelle fix voor VS Code:** Ga naar VS Code-instellingen → zoek op `Claude` → zet de toggle **"Allow dangerously skip permissions"** aan. Daarna treedt `defaultMode: bypassPermissions` in `.claude/settings.json` in werking en verschijnen er geen prompts meer.
+
 ## Wat zit er in de container?
 
 | Tool | Beschrijving |
