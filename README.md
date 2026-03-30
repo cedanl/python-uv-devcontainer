@@ -23,7 +23,12 @@ Een kant-en-klare ontwikkelomgeving voor Python-projecten met [uv](https://githu
 
 ### Positron
 
-Clone de repo en open de map in Positron. Positron detecteert de `.devcontainer/devcontainer.json` automatisch en vraagt of je wilt heropenen in een container.
+1. Installeer de extensie **Dev Containers** (`ms-vscode-remote.remote-containers`) via de Positron Extensions-zijbalk
+2. Clone de repo en open de map:
+   ```bash
+   git clone https://github.com/cedanl/python-uv-devcontainer
+   ```
+3. Positron detecteert de `.devcontainer/devcontainer.json` automatisch en vraagt of je wilt heropenen in een container.
 
 ### DevPod
 
