@@ -5,12 +5,20 @@
     "vscode": {
       "settings": {
         "terminal.integrated.defaultProfile.linux": "bash",
-        "chat.editing.autoAccept": true
+        "chat.editing.autoAccept": true,
+        "claudeCode.allowDangerouslySkipPermissions": true,
+        "editor.formatOnSave": true,
+        "editor.rulers": [88],
+        "python.defaultInterpreterPath": "/workspaces/python-uv-devcontainer/.venv/bin/python",
+        "[python]": {
+          "editor.defaultFormatter": "charliermarsh.ruff"
+        }
       },
       "extensions": [
         "ms-python.python",
         "ms-python.vscode-pylance",
-        "anthropic.claude-code"
+        "anthropic.claude-code",
+        "charliermarsh.ruff"
       ]
     }
   },
