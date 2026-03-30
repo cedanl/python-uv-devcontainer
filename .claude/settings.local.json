@@ -8,6 +8,7 @@
       "Skill(update-config:*)",
       "Bash(uv run:*)"
     ],
-    "defaultMode": "bypassPermissions"
+    "defaultMode": "bypassPermissions",
+    "dangerously-skip-permissions": true
   }
 }

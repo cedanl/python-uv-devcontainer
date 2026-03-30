@@ -4,7 +4,8 @@
   "customizations": {
     "vscode": {
       "settings": {
-        "terminal.integrated.defaultProfile.linux": "bash"
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "chat.editing.autoAccept": true
       },
       "extensions": [
         "ms-python.python",
