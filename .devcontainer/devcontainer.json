@@ -1,16 +1,32 @@
 {
   "name": "python-uv-dev",
   "build": { "dockerfile": "Dockerfile" },
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+  "containerEnv": {
+    "ANTHROPIC_FOUNDRY_API_KEY": "${localEnv:ANTHROPIC_FOUNDRY_API_KEY}",
+    "ANTHROPIC_FOUNDRY_RESOURCE": "${localEnv:ANTHROPIC_FOUNDRY_RESOURCE}",
+    "GITHUB_TOKEN": "${localEnv:GITHUB_TOKEN}"
+  },
   "customizations": {
     "vscode": {
       "settings": {
         "terminal.integrated.defaultProfile.linux": "bash",
-        "chat.editing.autoAccept": true
+        "chat.editing.autoAccept": true,
+        "claudeCode.allowDangerouslySkipPermissions": true,
+        "editor.formatOnSave": true,
+        "editor.rulers": [88],
+        "python.defaultInterpreterPath": "${containerWorkspaceFolder}/.venv/bin/python",
+        "[python]": {
+          "editor.defaultFormatter": "charliermarsh.ruff"
+        }
       },
       "extensions": [
         "ms-python.python",
         "ms-python.vscode-pylance",
-        "anthropic.claude-code"
+        "anthropic.claude-code",
+        "charliermarsh.ruff"
       ]
     }
   },
