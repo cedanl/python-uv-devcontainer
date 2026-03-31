@@ -23,6 +23,8 @@ Een kant-en-klare ontwikkelomgeving voor Python-projecten met [uv](https://githu
 
 ### Positron
 
+> **Vereiste instelling (experimenteel):** Ga naar Positron-instellingen → zoek op `Dev` → zet **DEV > Containers: Enable** aan. Zonder deze instelling werkt de devcontainer niet.
+
 1. Installeer de extensie **Dev Containers** (`ms-vscode-remote.remote-containers`) via de Positron Extensions-zijbalk
 2. Clone de repo en open de map:
    ```bash
