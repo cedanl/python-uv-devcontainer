@@ -6,7 +6,12 @@
       "Read(//tmp/**)",
       "Skill(update-config)",
       "Skill(update-config:*)",
-      "Bash(uv run:*)"
+      "Bash(uv run:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(gh pr:*)",
+      "Bash(git checkout:*)"
     ],
     "defaultMode": "bypassPermissions",
     "dangerously-skip-permissions": true
