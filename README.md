@@ -102,6 +102,21 @@ Zonder deze instelling vraagt de extensie bij elke bestandswijziging om bevestig
 
 > **Snelle fix voor VS Code:** Ga naar VS Code-instellingen → zoek op `Claude` → zet de toggle **"Allow dangerously skip permissions"** aan. Daarna treedt `defaultMode: bypassPermissions` in `.claude/settings.json` in werking en verschijnen er geen prompts meer.
 
+## Persoonlijke instellingen via dotfiles
+
+De container laadt automatisch gedeelde standaard-settings (formatter, linter, Claude Code). Wil je daar je eigen voorkeuren bovenop zetten — zoals shell aliases, git config of editor keybindings — dan kun je een dotfiles repo gebruiken.
+
+**Eenmalig instellen in VS Code of Positron:**
+
+`F1` → **Open User Settings (JSON)** → voeg toe:
+```json
+"dotfiles.repository": "https://github.com/<jouw-gebruikersnaam>/dotfiles"
+```
+
+Bij elke container start kloont de devcontainer jouw dotfiles repo automatisch en voert `install.sh` uit. Je beheert die repo zelf — het raakt deze repo niet.
+
+> Nog geen dotfiles repo? GitHub heeft een [handleiding](https://docs.github.com/en/codespaces/setting-your-user-preferences/personalizing-github-codespaces-for-your-account#dotfiles) om er een aan te maken. De aanpak werkt ook buiten Codespaces in elke devcontainer.
+
 ## Wat zit er in de container?
 
 | Tool | Beschrijving |
@@ -110,6 +125,7 @@ Zonder deze instelling vraagt de extensie bij elke bestandswijziging om bevestig
 | `uv` | Snelle Python package manager |
 | `claude` | Claude Code CLI |
 | `gh` | GitHub CLI |
+| `ruff` | Python formatter en linter |
 | CEDA org-skills | Geladen vanuit `cedanl/.github` via `npx skills` |
 
 ## Problemen oplossen
