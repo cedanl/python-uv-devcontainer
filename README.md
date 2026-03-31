@@ -46,9 +46,23 @@ git clone https://github.com/cedanl/python-uv-devcontainer
 devcontainer up --workspace-folder python-uv-devcontainer
 ```
 
-## Claude Code instellen
+## Credentials instellen
 
-Claude Code is vooraf geïnstalleerd, maar heeft twee credentials nodig voor de CEDA Foundry API.
+De container heeft drie credentials nodig: Anthropic Foundry API (voor Claude Code) en een GitHub token (voor `gh` CLI).
+
+### Automatisch — via host shell config (aanbevolen)
+
+Als deze variabelen al in je shell config staan (`.zshrc`, `.bashrc`, etc.), worden ze **automatisch doorgegeven** aan de container. Er is geen verdere setup nodig:
+
+```bash
+export ANTHROPIC_FOUNDRY_API_KEY=<jouw api key>
+export ANTHROPIC_FOUNDRY_RESOURCE=<jouw resource naam>
+export GITHUB_TOKEN=<jouw github token>
+```
+
+### Handmatig — via `.env` bestand (fallback)
+
+Staan de variabelen niet in je shell config, dan kun je ze eenmalig invullen in een lokaal `.env` bestand:
 
 **Stap 1** — Maak het secrets-bestand aan:
 ```bash
@@ -59,15 +73,25 @@ cp .devcontainer/.env.example .devcontainer/.env
 ```
 ANTHROPIC_FOUNDRY_API_KEY=<jouw api key>
 ANTHROPIC_FOUNDRY_RESOURCE=<jouw resource naam>
+GITHUB_TOKEN=<jouw github token>
 ```
 
 > Dit bestand staat in `.gitignore` en wordt nooit gecommit.
 
 **Stap 3** — `F1` → **Dev Containers: Rebuild Container**
 
-Na het herbouwen werkt `claude` meteen.
+Na het herbouwen werkt `claude` en `gh` meteen.
 
-**Stap 4** — Installeer de **Claude** VS Code-extensie (`anthropic.claude-code`) en zet bewerkingen op automatisch accepteren:
+### Bij eerste start
+
+Als credentials nog niet beschikbaar zijn, start `onboard.sh` automatisch en vraagt om de Foundry credentials in te vullen. Je kunt dit ook handmatig opnieuw uitvoeren met:
+```bash
+onboard
+```
+
+## Claude Code extensie instellen
+
+Installeer de **Claude** VS Code-extensie (`anthropic.claude-code`) en zet bewerkingen op automatisch accepteren:
 
 `F1` → **Open User Settings (JSON)** → voeg toe:
 ```json
@@ -85,6 +109,7 @@ Zonder deze instelling vraagt de extensie bij elke bestandswijziging om bevestig
 | `python` | Python 3.12 |
 | `uv` | Snelle Python package manager |
 | `claude` | Claude Code CLI |
+| `gh` | GitHub CLI |
 | CEDA org-skills | Geladen vanuit `cedanl/.github` via `npx skills` |
 
 ## Problemen oplossen

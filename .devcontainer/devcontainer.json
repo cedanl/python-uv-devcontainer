@@ -1,6 +1,14 @@
 {
   "name": "python-uv-dev",
   "build": { "dockerfile": "Dockerfile" },
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+  "containerEnv": {
+    "ANTHROPIC_FOUNDRY_API_KEY": "${localEnv:ANTHROPIC_FOUNDRY_API_KEY}",
+    "ANTHROPIC_FOUNDRY_RESOURCE": "${localEnv:ANTHROPIC_FOUNDRY_RESOURCE}",
+    "GITHUB_TOKEN": "${localEnv:GITHUB_TOKEN}"
+  },
   "customizations": {
     "vscode": {
       "settings": {
