@@ -5,8 +5,6 @@
     "ghcr.io/devcontainers/features/github-cli:1": {}
   },
   "containerEnv": {
-    "ANTHROPIC_FOUNDRY_API_KEY": "${localEnv:ANTHROPIC_FOUNDRY_API_KEY}",
-    "ANTHROPIC_FOUNDRY_RESOURCE": "${localEnv:ANTHROPIC_FOUNDRY_RESOURCE}",
     "GITHUB_TOKEN": "${localEnv:GITHUB_TOKEN}"
   },
   "customizations": {
@@ -31,7 +29,7 @@
     }
   },
   "initializeCommand": "touch .devcontainer/.env",
-  "runArgs": ["--env-file", "${localWorkspaceFolder}/.devcontainer/.env"],
+  "runArgs": ["--env-file", ".devcontainer/.env"],
   "postCreateCommand": "bash .devcontainer/post-create.sh",
   "postAttachCommand": "[[ ! -f ~/.claude/.onboarded ]] && bash .devcontainer/onboard.sh || true",
   "forwardPorts": [8501],
