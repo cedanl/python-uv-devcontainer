@@ -21,16 +21,28 @@ Een kant-en-klare ontwikkelomgeving voor Python-projecten met [uv](https://githu
    ```
 3. Klik op **"Reopen in Container"** rechtsonder, of `F1` → **Dev Containers: Reopen in Container**
 
-### Positron
+### Positron / VSCodium
 
-> **Vereiste instelling (experimenteel):** Ga naar Positron-instellingen → zoek op `Dev` → zet **DEV > Containers: Enable** aan. Zonder deze instelling werkt de devcontainer niet.
+Positron en VSCodium ondersteunen de native Dev Containers extensie niet volledig. Gebruik in plaats daarvan de **Codium Devcontainer** extensie — die bouwt de container via Docker en verbindt via SSH.
 
-1. Installeer de extensie **Dev Containers** (`ms-vscode-remote.remote-containers`) via de Positron Extensions-zijbalk
-2. Clone de repo en open de map:
+**Eenmalige setup:**
+
+1. Installeer de benodigde extensies:
    ```bash
-   git clone https://github.com/cedanl/python-uv-devcontainer
+   positron --install-extension DDorch.codium-devcontainer
+   positron --install-extension jeanp413.open-remote-ssh
    ```
-3. Positron detecteert de `.devcontainer/devcontainer.json` automatisch en vraagt of je wilt heropenen in een container.
+2. Installeer de **Claude Code** extensie handmatig via de Extensions-zijbalk (zoek op `anthropic.claude-code` op Open VSX)
+
+**Container starten:**
+
+1. Clone de repo en open de map in Positron
+2. `F1` → **Devcontainer: Open Folder in Devcontainer (SSH)**
+3. Na het bouwen: verbind opnieuw via `F1` → **Devcontainer: Open Folder in Devcontainer (SSH)**
+
+> Bij de eerste verbinding opent een terminal met de onboarding-wizard voor credentials. Zie [Credentials instellen](#credentials-instellen) hieronder.
+
+> **Let op:** `containerEnv` wordt niet ondersteund door Codium Devcontainer. Host shell variabelen worden niet automatisch doorgegeven — gebruik de `.env` methode of de onboarding-wizard.
 
 ### DevPod
 
