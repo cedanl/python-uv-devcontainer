@@ -33,6 +33,7 @@
   "initializeCommand": "touch .devcontainer/.env",
   "runArgs": ["--env-file", "${localWorkspaceFolder}/.devcontainer/.env"],
   "postCreateCommand": "bash .devcontainer/post-create.sh",
+  "postStartCommand": "[[ ! -f ~/.claude/.onboarded ]] && bash .devcontainer/onboard.sh || true",
   "postAttachCommand": "[[ ! -f ~/.claude/.onboarded ]] && bash .devcontainer/onboard.sh || true",
   "forwardPorts": [8501],
   "remoteUser": "vscode"
