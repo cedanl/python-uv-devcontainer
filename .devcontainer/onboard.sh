@@ -36,25 +36,17 @@ _mark_done() {
 
 _write_codex_config() {
   if [[ -z "${AZURE_OPENAI_ENDPOINT:-}" ]]; then
-    _error "AZURE_OPENAI_ENDPOINT niet gevonden — ~/.codex/config.toml blijft placeholder"
+    _error "AZURE_OPENAI_ENDPOINT niet gevonden — ~/.codex/config.toml niet aangemaakt"
     return
   fi
   # AZURE_OPENAI_ENDPOINT = volledige URL, bijv. https://resource.cognitiveservices.azure.com/
   # Codex vereist /openai/v1 als pad — dit verschilt van ANTHROPIC_FOUNDRY_RESOURCE
   # (dat alleen de resourcenaam is, zonder URL of pad).
-  local base_url="${AZURE_OPENAI_ENDPOINT%/}/openai/v1"
+  local CODEX_TEMPLATE
+  CODEX_TEMPLATE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/codex-config.toml.template"
   mkdir -p ~/.codex
-  cat > ~/.codex/config.toml << EOF
-model = "gpt-5.2"
-model_provider = "azure"
-model_reasoning_effort = "medium"
-
-[model_providers.azure]
-name = "Azure OpenAI"
-base_url = "$base_url"
-env_key = "AZURE_OPENAI_API_KEY"
-wire_api = "responses"
-EOF
+  export AZURE_OPENAI_BASE_URL="${AZURE_OPENAI_ENDPOINT%/}/openai/v1"
+  envsubst '$AZURE_OPENAI_BASE_URL' < "$CODEX_TEMPLATE" > ~/.codex/config.toml
   _done "Codex config bijgewerkt  — ~/.codex/config.toml"
 }
 

@@ -15,19 +15,10 @@ git clone --depth 1 https://github.com/skills-directory/skill-codex.git /tmp/ski
   && cp -r /tmp/skill-codex/plugins/skill-codex/skills/codex ~/.claude/skills/codex \
   && rm -rf /tmp/skill-codex
 
-# Codex config — base_url vereist AZURE_OPENAI_ENDPOINT, wordt afgemaakt door onboard.sh
+# Codex config — gegenereerd via envsubst uit template; auto-refresh bij elke nieuwe terminal
 mkdir -p ~/.codex
-cat > ~/.codex/config.toml << 'EOF'
-model = "gpt-5.2"
-model_provider = "azure"
-model_reasoning_effort = "medium"
-
-[model_providers.azure]
-name = "Azure OpenAI"
-base_url = "https://PLACEHOLDER.openai.azure.com/openai/v1"
-env_key = "AZURE_OPENAI_API_KEY"
-wire_api = "responses"
-EOF
+CODEX_TEMPLATE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/codex-config.toml.template"
+echo "[ -n \"\$AZURE_OPENAI_ENDPOINT\" ] && export AZURE_OPENAI_BASE_URL=\"\${AZURE_OPENAI_ENDPOINT%/}/openai/v1\" && envsubst '\$AZURE_OPENAI_BASE_URL' < \"$CODEX_TEMPLATE\" > ~/.codex/config.toml" >> ~/.bashrc
 
 # Global Claude Code instructies — geldt voor alle repo's in deze container
 mkdir -p ~/.claude
