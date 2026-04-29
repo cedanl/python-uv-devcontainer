@@ -15,10 +15,18 @@ git clone --depth 1 https://github.com/skills-directory/skill-codex.git /tmp/ski
   && cp -r /tmp/skill-codex/plugins/skill-codex/skills/codex ~/.claude/skills/codex \
   && rm -rf /tmp/skill-codex
 
-# Configure Codex CLI defaults (Azure deployment name as default model)
+# Codex config — base_url vereist AZURE_OPENAI_ENDPOINT, wordt afgemaakt door onboard.sh
 mkdir -p ~/.codex
 cat > ~/.codex/config.toml << 'EOF'
 model = "gpt-5.2"
+model_provider = "azure"
+model_reasoning_effort = "medium"
+
+[model_providers.azure]
+name = "Azure OpenAI"
+base_url = "https://PLACEHOLDER.openai.azure.com/openai/v1"
+env_key = "AZURE_OPENAI_API_KEY"
+wire_api = "responses"
 EOF
 
 # Global Claude Code instructies — geldt voor alle repo's in deze container

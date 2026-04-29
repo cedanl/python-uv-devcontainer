@@ -34,6 +34,27 @@ _mark_done() {
   touch "$SENTINEL"
 }
 
+_write_codex_config() {
+  if [[ -z "${AZURE_OPENAI_ENDPOINT:-}" ]]; then
+    _error "AZURE_OPENAI_ENDPOINT niet gevonden — ~/.codex/config.toml blijft placeholder"
+    return
+  fi
+  local base_url="${AZURE_OPENAI_ENDPOINT%/}/openai/v1"
+  mkdir -p ~/.codex
+  cat > ~/.codex/config.toml << EOF
+model = "gpt-5.2"
+model_provider = "azure"
+model_reasoning_effort = "medium"
+
+[model_providers.azure]
+name = "Azure OpenAI"
+base_url = "$base_url"
+env_key = "AZURE_OPENAI_API_KEY"
+wire_api = "responses"
+EOF
+  _done "Codex config bijgewerkt  — ~/.codex/config.toml"
+}
+
 main() {
   echo ""
   echo -e "${BOLD}${CYAN}╔══════════════════════════════════════════════╗${RESET}"
@@ -44,6 +65,7 @@ main() {
   if _vars_in_env; then
     _done "ANTHROPIC_FOUNDRY_API_KEY  — gevonden"
     _done "ANTHROPIC_FOUNDRY_RESOURCE — gevonden"
+    _write_codex_config
     echo ""
     _info "Claude is klaar voor gebruik."
     _mark_done
@@ -59,6 +81,7 @@ main() {
     _info "Waarden gevonden in .devcontainer/.env — sourcen..."
     set -a && source "$ENV_FILE" && set +a
     _done "Vars geladen voor deze sessie."
+    _write_codex_config
     echo ""
     _info "CLI:       je bent klaar, open een nieuwe terminal."
     _info "Extension: rebuild je devcontainer."
@@ -85,6 +108,7 @@ main() {
 
   set -a && source "$ENV_FILE" && set +a
   _done "Credentials opgeslagen in .devcontainer/.env"
+  _write_codex_config
   echo ""
   _info "CLI:       je bent klaar."
   _info "Extension: rebuild je devcontainer."

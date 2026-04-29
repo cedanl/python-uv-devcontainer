@@ -35,5 +35,3 @@ ENV CLAUDE_CODE_USE_FOUNDRY=1 \
     ANTHROPIC_DEFAULT_SONNET_MODEL=claude-sonnet-4-6 \
     ANTHROPIC_DEFAULT_HAIKU_MODEL=claude-haiku-4-6
 
-# Codex / OpenAI Azure environment
-ENV CODEX_DEFAULT_MODEL=gpt-5.2
