@@ -2,6 +2,11 @@ model = "gpt-5.2"
 model_provider = "azure"
 model_reasoning_effort = "medium"
 
+# bwrap kan geen namespaces aanmaken in een container — devcontainer is zelf de sandbox.
+# Equivalent aan CLI-flag --dangerously-bypass-approvals-and-sandbox (werkt ook in VS Code extension).
+approval_policy = "never"
+sandbox_mode = "danger-full-access"
+
 [model_providers.azure]
 name = "Azure OpenAI"
 base_url = "${AZURE_OPENAI_BASE_URL}"
