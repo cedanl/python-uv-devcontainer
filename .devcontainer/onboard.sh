@@ -39,6 +39,9 @@ _write_codex_config() {
     _error "AZURE_OPENAI_ENDPOINT niet gevonden — ~/.codex/config.toml blijft placeholder"
     return
   fi
+  # AZURE_OPENAI_ENDPOINT = volledige URL, bijv. https://resource.cognitiveservices.azure.com/
+  # Codex vereist /openai/v1 als pad — dit verschilt van ANTHROPIC_FOUNDRY_RESOURCE
+  # (dat alleen de resourcenaam is, zonder URL of pad).
   local base_url="${AZURE_OPENAI_ENDPOINT%/}/openai/v1"
   mkdir -p ~/.codex
   cat > ~/.codex/config.toml << EOF
