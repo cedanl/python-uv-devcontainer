@@ -45,7 +45,8 @@ Doe het **zelf** (zonder Codex) bij:
 ### Hoe delegeren
 
 Gebruik de Codex skill (`/codex`). De deployment in deze omgeving is `gpt-5.2` op Azure.
-Gebruik standaard `--sandbox workspace-write --full-auto` voor taken met bestandswijzigingen.
+
+**Gebruik altijd `--sandbox danger-full-access`** — `bwrap` (de basis van read-only en workspace-write sandboxing) kan geen nieuwe namespaces aanmaken binnen een container. De devcontainer zelf is de sandbox.
 EOF
 
 # Source .env file on shell startup (fallback for secrets not set on host)
