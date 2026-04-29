@@ -46,7 +46,7 @@ Doe het **zelf** (zonder Codex) bij:
 
 Gebruik de Codex skill (`/codex`). De deployment in deze omgeving is `gpt-5.2` op Azure.
 
-**Gebruik altijd `--sandbox danger-full-access`** — `bwrap` (de basis van read-only en workspace-write sandboxing) kan geen nieuwe namespaces aanmaken binnen een container. De devcontainer zelf is de sandbox.
+**Gebruik altijd `--dangerously-bypass-approvals-and-sandbox`** — `bwrap` kan geen namespaces aanmaken binnen een container. De devcontainer zelf is de sandbox; deze flag is specifiek voor extern gesandboxte omgevingen zoals deze.
 EOF
 
 # Source .env file on shell startup (fallback for secrets not set on host)
