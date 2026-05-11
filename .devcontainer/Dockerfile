@@ -13,6 +13,9 @@ RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - && \
     apt-get install -y --no-install-recommends nodejs && \
     rm -rf /var/lib/apt/lists/*
 
+# Install Codex CLI (OpenAI) globally
+RUN npm install -g @openai/codex
+
 # Non-root dev user
 RUN useradd -m vscode
 USER vscode
@@ -31,3 +34,4 @@ ENV CLAUDE_CODE_USE_FOUNDRY=1 \
     ANTHROPIC_DEFAULT_OPUS_MODEL=claude-opus-4-6 \
     ANTHROPIC_DEFAULT_SONNET_MODEL=claude-sonnet-4-6 \
     ANTHROPIC_DEFAULT_HAIKU_MODEL=claude-haiku-4-6
+
