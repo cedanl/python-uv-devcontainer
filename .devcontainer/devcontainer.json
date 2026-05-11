@@ -11,7 +11,8 @@
     "AZURE_OPENAI_API_KEY": "${localEnv:AZURE_OPENAI_API_KEY}",
     "AZURE_OPENAI_ENDPOINT": "${localEnv:AZURE_OPENAI_ENDPOINT}",
     "WILLMA_API_KEY": "${localEnv:WILLMA_API_KEY}",
-    "WILLMA_BASE_URL": "${localEnv:WILLMA_BASE_URL}"
+    "WILLMA_BASE_URL": "${localEnv:WILLMA_BASE_URL}",
+    "USER_CONFIG_REPO": "${localEnv:USER_CONFIG_REPO}"
   },
   "customizations": {
     "vscode": {
