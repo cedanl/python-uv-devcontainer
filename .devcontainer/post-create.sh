@@ -84,8 +84,9 @@ if [[ -n "${USER_CONFIG_REPO:-}" ]]; then
 
     # Eigen post-create script — draait als laatste
     if [[ -f /tmp/user-config/post-create.sh ]]; then
-      bash /tmp/user-config/post-create.sh
-      echo "  ✔ Eigen post-create.sh uitgevoerd"
+      bash /tmp/user-config/post-create.sh \
+        && echo "  ✔ Eigen post-create.sh uitgevoerd" \
+        || echo "  ✖ Eigen post-create.sh mislukt — container gaat door"
     fi
 
     rm -rf /tmp/user-config
