@@ -9,7 +9,9 @@
     "ANTHROPIC_FOUNDRY_RESOURCE": "${localEnv:ANTHROPIC_FOUNDRY_RESOURCE}",
     "GITHUB_TOKEN": "${localEnv:GITHUB_TOKEN}",
     "AZURE_OPENAI_API_KEY": "${localEnv:AZURE_OPENAI_API_KEY}",
-    "AZURE_OPENAI_ENDPOINT": "${localEnv:AZURE_OPENAI_ENDPOINT}"
+    "AZURE_OPENAI_ENDPOINT": "${localEnv:AZURE_OPENAI_ENDPOINT}",
+    "WILLMA_API_KEY": "${localEnv:WILLMA_API_KEY}",
+    "WILLMA_BASE_URL": "${localEnv:WILLMA_BASE_URL}"
   },
   "customizations": {
     "vscode": {
