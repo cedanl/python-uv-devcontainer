@@ -49,6 +49,10 @@ Gebruik de Codex skill (`/codex`). De deployment in deze omgeving is `gpt-5.2` o
 De sandbox is geconfigureerd via `~/.codex/config.toml` (`approval_policy = "never"`, `sandbox_mode = "danger-full-access"`). Geen extra flags nodig — werkt zowel in CLI als VS Code extension.
 EOF
 
+# Pi (coding agent) — installeer Willma extension
+mkdir -p ~/.pi/agent/extensions
+cp "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/willma-extension.ts" ~/.pi/agent/extensions/willma.ts
+
 # Source .env file on shell startup (fallback for secrets not set on host)
 ENV_FILE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/.env"
 echo "[ -f \"$ENV_FILE\" ] && set -a && source \"$ENV_FILE\" && set +a" >> ~/.bashrc
