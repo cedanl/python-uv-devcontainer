@@ -12,3 +12,9 @@ name = "Azure OpenAI"
 base_url = "${AZURE_OPENAI_BASE_URL}"
 env_key = "AZURE_OPENAI_API_KEY"
 wire_api = "responses"
+
+[features]
+hooks = true
+
+[mcp_servers.context-mode]
+command = "context-mode"

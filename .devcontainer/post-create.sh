@@ -53,6 +53,55 @@ EOF
 mkdir -p ~/.pi/agent/extensions
 cp "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/willma-extension.ts" ~/.pi/agent/extensions/willma.ts
 
+# context-mode — MCP + hooks voor Claude Code, Codex en Pi
+CM_ROOT=$(node -e "console.log(require.resolve('context-mode/package.json').replace('/package.json',''))" 2>/dev/null || true)
+if [[ -n "$CM_ROOT" ]]; then
+  # Claude Code: MCP server + hooks via settings.json
+  python3 - <<PYEOF
+import json, os
+
+settings_path = os.path.expanduser('~/.claude/settings.json')
+cm_root = "$CM_ROOT"
+
+settings = {}
+if os.path.exists(settings_path):
+    with open(settings_path) as f:
+        settings = json.load(f)
+
+settings.setdefault('mcpServers', {})['context-mode'] = {'command': 'context-mode', 'args': []}
+
+hooks = settings.setdefault('hooks', {})
+
+def add_hook(event, matcher, cmd):
+    entries = hooks.setdefault(event, [])
+    if not any('context-mode' in str(e) and e.get('matcher', '') == matcher for e in entries):
+        entries.append({'matcher': matcher, 'hooks': [{'type': 'command', 'command': cmd}]})
+
+add_hook('PostToolUse',
+    'Bash|Read|Write|Edit|NotebookEdit|Glob|Grep|TodoWrite|TaskCreate|TaskUpdate|EnterPlanMode|ExitPlanMode|Skill|Agent|AskUserQuestion|EnterWorktree|mcp__',
+    f'node "{cm_root}/hooks/posttooluse.mjs"')
+add_hook('PreCompact', '', f'node "{cm_root}/hooks/precompact.mjs"')
+for matcher in ['Bash', 'WebFetch', 'Read', 'Grep']:
+    add_hook('PreToolUse', matcher, f'node "{cm_root}/hooks/pretooluse.mjs"')
+add_hook('UserPromptSubmit', '', f'node "{cm_root}/hooks/userpromptsubmit.mjs"')
+add_hook('SessionStart', '', f'node "{cm_root}/hooks/sessionstart.mjs"')
+
+os.makedirs(os.path.dirname(settings_path), exist_ok=True)
+with open(settings_path, 'w') as f:
+    json.dump(settings, f, indent=2)
+print('  ✔ Claude Code: context-mode MCP + hooks geconfigureerd')
+PYEOF
+
+  # Pi: symlink zodat relatieve import in index.ts naar CM_ROOT/build/ verwijst
+  mkdir -p ~/.pi/agent/extensions
+  ln -sf "${CM_ROOT}/.pi/extensions/context-mode" ~/.pi/agent/extensions/context-mode
+  echo "  ✔ Pi: context-mode extension geïnstalleerd"
+
+  # Codex: hooks
+  cp "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/context-mode-codex-hooks.json" ~/.codex/hooks.json
+  echo "  ✔ Codex: context-mode hooks geconfigureerd"
+fi
+
 # Gebruiker-specifieke configuratie (optioneel)
 # Stel USER_CONFIG_REPO in in .devcontainer/.env — zie .env.example voor de repo-structuur.
 if [[ -n "${USER_CONFIG_REPO:-}" ]]; then

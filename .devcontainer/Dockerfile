@@ -13,8 +13,8 @@ RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - && \
     apt-get install -y --no-install-recommends nodejs && \
     rm -rf /var/lib/apt/lists/*
 
-# Install Codex CLI (OpenAI) and Pi coding agent globally
-RUN npm install -g @openai/codex @earendil-works/pi-coding-agent
+# Install Codex CLI (OpenAI), Pi coding agent, and context-mode globally
+RUN npm install -g @openai/codex @earendil-works/pi-coding-agent context-mode
 
 # Non-root dev user
 RUN useradd -m vscode
